@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`embed inside dom 1`] = `
+<span
+  class="activated"
+  id="profileNameDOM"
+/>
+`;
+
+exports[`embed inside dom by id 1`] = `
+<span
+  class="activated"
+  id="profileNameDOM"
+/>
+`;
+
+exports[`use third-party dom element 1`] = `
+<div
+  class="highlighted"
+>
+  <p>
+    child text
+  </p>
+  <img
+    class="selected"
+    src="https://i.picsum.photos/id/320/200/300.jpg"
+  />
+</div>
+`;

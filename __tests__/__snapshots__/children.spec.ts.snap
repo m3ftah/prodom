@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`move one keyed child - keep pure 1`] = `
+<div
+  class="form-item"
+>
+  <input
+    class="form"
+    type="label"
+  >
+    child 1
+  </input>
+  <input
+    class="selected"
+  >
+    child 2
+  </input>
+  <span
+    class="warning"
+  >
+    child 3
+  </span>
+</div>
+`;
+
+exports[`move one keyed child - keep pure 2`] = `
+<div
+  class="form-item"
+>
+  <input
+    class="form"
+    type="label"
+  >
+    child 1
+  </input>
+  <span
+    class="warning"
+  >
+    child 3
+  </span>
+  <input
+    class="selected"
+  >
+    child 2
+  </input>
+</div>
+`;
+
+exports[`move one keyed child - keep pure 3`] = `
+<div
+  class="form-item"
+>
+  <span
+    class="warning"
+  >
+    child 3
+  </span>
+  <input
+    class="form"
+    type="label"
+  >
+    child 1
+  </input>
+</div>
+`;
+
+exports[`remove one child 1`] = `
+<div
+  class="form-item"
+>
+  <input
+    class="form"
+    type="label"
+  >
+    child 1
+  </input>
+  <input
+    class="selected"
+  >
+    child 2
+  </input>
+  <span
+    class="warning"
+  >
+    child 3
+  </span>
+</div>
+`;
+
+exports[`remove one child 2`] = `
+<div
+  class="form-item"
+>
+  <input
+    class="form"
+    type="label"
+  >
+    child 1
+  </input>
+  <span
+    class="warning"
+  >
+    child 3
+  </span>
+</div>
+`;
+
+exports[`render with condition 1`] = `
+<div
+  class="form-item"
+>
+  <p
+    class="form"
+  >
+    some text
+  </p>
+  <input
+    class="selected"
+  >
+    other input
+  </input>
+</div>
+`;
+
+exports[`render with condition 2`] = `
+<div
+  class="form-item"
+>
+  <input
+    class="selected"
+  >
+    other input
+  </input>
+</div>
+`;
+
+exports[`render with condition 3`] = `
+<div
+  class="form-item"
+>
+  <p
+    class="form"
+  >
+    some text
+  </p>
+  <input
+    class="selected"
+  >
+    other input
+  </input>
+</div>
+`;

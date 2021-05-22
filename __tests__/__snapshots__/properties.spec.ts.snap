@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dom property 1`] = `
+<div
+  class="form-item"
+>
+  <p
+    class="form"
+  >
+    some text
+  </p>
+  <input
+    class="selected"
+  >
+    other input
+  </input>
+</div>
+`;
+
+exports[`freeze property 1`] = `
+<p>
+  child text
+</p>
+`;
+
+exports[`init property 1`] = `
+<div
+  class="form-item"
+>
+  <p
+    class="form"
+  >
+    some text
+  </p>
+</div>
+`;
+
+exports[`init property 2`] = `
+<input
+  class="form-item"
+/>
+`;
+
+exports[`init property 3`] = `
+<input
+  class="hi"
+/>
+`;
+
+exports[`setAttribute property 1`] = `
+<input
+  class="selected"
+>
+  other input
+</input>
+`;
+
+exports[`setAttribute property 2`] = `
+<input
+  class="selected"
+  type="radio"
+>
+  other input
+</input>
+`;
+
+exports[`setAttribute property 3`] = `
+<input
+  class="selected"
+  type="checkbox"
+>
+  other input
+</input>
+`;
+
+exports[`setAttribute property 4`] = `
+<input
+  class="selected"
+  data="here"
+  type=""
+>
+  other input
+</input>
+`;
+
+exports[`setAttribute property 5`] = `
+<input
+  class="selected"
+  data="here"
+  type=""
+>
+  other input
+</input>
+`;
+
+exports[`virtual property 1`] = `
+<div>
+  <span>
+    Hello world
+  </span>
+</div>
+`;

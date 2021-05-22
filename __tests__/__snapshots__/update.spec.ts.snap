@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`remove all classNames 1`] = `
+<p
+  class=""
+>
+  modified by diff
+</p>
+`;
+
+exports[`remove one className 1`] = `
+<p
+  class="highlighted"
+>
+  modified by diff
+</p>
+`;
+
+exports[`update children content and type 1`] = `
+<div
+  class="form-item"
+>
+  <input
+    class="form"
+    type="label"
+  >
+    child 1
+  </input>
+  <input
+    class="selected"
+  >
+    child 2
+  </input>
+</div>
+`;
+
+exports[`update children content and type 2`] = `
+<div
+  class="form-item"
+>
+  <p
+    class="form"
+  >
+    modified for new item
+  </p>
+  <input
+    class="selected"
+  >
+    modified by diff
+  </input>
+</div>
+`;
+
+exports[`update pure component 1`] = `
+<span
+  class="warning"
+>
+  Hello world
+</span>
+`;
+
+exports[`update pure component 2`] = `
+<span
+  class="warning"
+>
+  Updated text
+</span>
+`;
+
+exports[`update pure component 3`] = `
+<span
+  class="warning"
+>
+  Hello world
+</span>
+`;
+
+exports[`update style 1`] = `
+<p
+  class="highlighted"
+  style="background-color: blue; color: black;"
+>
+  modified by diff
+</p>
+`;
+
+exports[`update style 2`] = `
+<p
+  class="highlighted"
+  style="background-color: black; color: black;"
+>
+  modified by diff
+</p>
+`;
+
+exports[`update style 3`] = `
+<p
+  class="highlighted"
+  style=""
+>
+  modified by diff
+</p>
+`;
+
+exports[`update textContent 1`] = `
+<p>
+  modified by diff
+</p>
+`;

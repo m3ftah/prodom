@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render async pure component 1`] = `
+<div>
+  <span
+    class="dev"
+  >
+    1
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+</div>
+`;
+
+exports[`render async pure component 2`] = `
+<div>
+  <span
+    class="dev"
+  >
+    2, was: 1
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+</div>
+`;
+
+exports[`render component 1`] = `
+<div>
+  <span>
+    Mike
+  </span>
+  <img
+    src="https://i.picsum.photos/id/320/200/300.jpg"
+  />
+</div>
+`;
+
+exports[`render contextual component 1`] = `
+<div>
+  <span>
+    Mike
+  </span>
+  <button />
+</div>
+`;
+
+exports[`render contextual component 2`] = `
+<div>
+  <span>
+    Max
+  </span>
+  <button />
+</div>
+`;
+
+exports[`render one child 1`] = `
+<div>
+  <p>
+    child text
+  </p>
+</div>
+`;
+
+exports[`render pure component 1`] = `
+<div>
+  <span
+    class="dev"
+  >
+    1
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+</div>
+`;
+
+exports[`render pure component 2`] = `
+<div>
+  <span
+    class="dev"
+  >
+    2, was: 1
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+</div>
+`;
+
+exports[`render store 1`] = `
+<div>
+  <span
+    class="dev"
+  >
+    1
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+</div>
+`;
+
+exports[`render store 2`] = `
+<div>
+  <span
+    class="dev"
+  >
+    2
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+</div>
+`;
+
+exports[`render two children 1`] = `
+<div
+  class="form-item"
+>
+  <input
+    class="form"
+    type="label"
+  >
+    child 1
+  </input>
+  <input
+    class="selected"
+  >
+    child 2
+  </input>
+</div>
+`;
