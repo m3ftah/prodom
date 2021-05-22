@@ -51,7 +51,7 @@ export const render = <U extends HTMLElement>(
     toRender.asyncComponent !== undefined
   ) {
     //Pure component
-    if (arraysEqual(context.oldArgs || [], toRender.args || [])) {
+    if (arraysEqual(context.oldArgs, toRender.args)) {
       return context.dom;
     }
     const oldArgs = context.oldArgs || [];
@@ -343,12 +343,16 @@ export function buildStore<T extends Node>(
           (mappedActions as any)[key] = (...value: any[]) =>
             Promise.resolve(goodActions[key](...value)).then(() =>
               render(
-                component(goodContext.store, mappedActions, ...newArgs) as any,
+                component(
+                  goodContext.store,
+                  mappedActions,
+                  ...(newArgs || [])
+                ) as any,
                 goodContext as any
               )
             );
         });
-        return component(goodContext.store, mappedActions, ...newArgs);
+        return component(goodContext.store, mappedActions, ...(newArgs || []));
       },
     });
   };
@@ -436,6 +440,8 @@ export const builder = <T extends Node>(
   return mapped;
 };
 function arraysEqual(a: any[], b: any[]) {
+  if (a === undefined) return false;
+  if (b === undefined) return false;
   if (a === b) return true;
   if (a == null || b == null) return false;
   if (a.length !== b.length) return false;

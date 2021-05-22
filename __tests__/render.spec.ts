@@ -117,11 +117,12 @@ test('render store', () => {
   ) => ({
     dom: 'div',
     children: [
-      {
-        dom: 'span',
-        textContent: '' + count,
-        className: [devMode && 'dev'],
-      } as Prototype<HTMLSpanElement>,
+      devMode &&
+        ({
+          dom: 'span',
+          textContent: '' + count,
+          className: [devMode && 'dev'],
+        } as Prototype<HTMLSpanElement>),
       {
         dom: 'button',
         textContent: 'increase',
@@ -134,7 +135,11 @@ test('render store', () => {
       } as Prototype<HTMLButtonElement>,
     ],
   });
-  const receivedDOM = render(buildStore(Counter, actions, store)(true), {});
+  const context = {};
+  const receivedDOM = render(
+    buildStore(Counter, actions, store)(true),
+    context
+  );
   expect(receivedDOM).toMatchSnapshot();
   expect(receivedDOM.children[0].textContent).toBe('1');
   return (receivedDOM.children[1] as HTMLButtonElement)
@@ -142,6 +147,8 @@ test('render store', () => {
     .then(() => {
       expect(receivedDOM.children[0].textContent).toBe('2');
       expect(receivedDOM).toMatchSnapshot();
+      render(buildStore(Counter, actions, store)(), context);
+      expect(receivedDOM.children[0].textContent).not.toBe('1');
     });
 });
 
