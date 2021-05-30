@@ -31,6 +31,11 @@ export type Prototype<T extends Node> = {
   placeHolder?: Prototype<HTMLElement>;
   args?: any[];
   resolve?: any;
+} & {
+  [P in Exclude<
+    keyof T,
+    'className' | 'children' | 'style' | 'setAttribute'
+  >]?: T[P];
 };
 /**
  *
@@ -393,7 +398,9 @@ export const asyncRender = <U extends HTMLElement>(
   toRender: Prototype<U> | ((context: Context<U>) => Prototype<U>),
   context: Context<U>
 ): Promise<U> => {
-  return new Promise(resolve => render({ ...toRender, resolve }, context));
+  return new Promise(resolve =>
+    render({ ...toRender, resolve } as Prototype<U>, context)
+  );
 };
 
 /**
