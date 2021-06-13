@@ -475,49 +475,6 @@ export const asyncRender = <U extends HTMLElement>(
   );
 };
 
-/**
- * A boilerplate method that can build a prototype with the most used properties
- * @param domValue To be passed to the document.createElement(...) method
- * @param text The innerText dom property
- * @param className an array of string css classNames
- * @returns A prototype builder that can be passed to the render method
- */
-export const builder = <T extends Node>(
-  domValue: keyof HTMLElementTagNameMap,
-  text?: string,
-  className?: string[]
-): (() => Prototype<T>) => {
-  const prototype: any = { init: () => document.createElement(domValue) };
-  if (text !== undefined) {
-    prototype.innerText = text;
-  }
-  if (className !== undefined) {
-    prototype.className = className;
-  }
-  const mapped = () => prototype;
-  const jsKeys = [
-    'innerText',
-    'className',
-    'children',
-    'onclick',
-    'style',
-    'value',
-    'oninput',
-    'setAttribute',
-  ];
-  jsKeys.forEach(
-    key =>
-      ((mapped as any)[key] = (object: any) => {
-        prototype[key] = object;
-        return mapped;
-      })
-  );
-  mapped.prop = (key: string, object: any) => {
-    prototype[key] = object;
-    return mapped;
-  };
-  return mapped;
-};
 function arraysEqual(a: any[], b: any[]) {
   if (a === undefined) return false;
   if (b === undefined) return false;
