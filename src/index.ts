@@ -43,14 +43,21 @@ export type Prototype<T extends Node> = {
  * The render function
  * @param toRender A prototype, or a method taking context and returning the prototype
  * @param context the context in which to render this prototype
+ * @param timeout render per time chunks of timeout (ms), in order to not block the thread.
  * @returns The actual dom node
  */
 export const render = <U extends HTMLElement>(
   toRender: Prototype<U> | ((context: Context<U>) => Prototype<U>),
-  context: Context<U>
+  context: Context<U>,
+  timeout?: number,
+  startedTime?: number
 ): U => {
+  let startedTimeCalculated = startedTime;
+  if (timeout !== undefined && startedTimeCalculated == undefined) {
+    startedTimeCalculated = Date.now();
+  }
   if (typeof toRender === 'function') {
-    return render(toRender(context), context);
+    return render(toRender(context), context, timeout, startedTimeCalculated);
   }
   if (
     toRender.component !== undefined ||
@@ -65,20 +72,34 @@ export const render = <U extends HTMLElement>(
     if (toRender.component !== undefined) {
       return render(
         toRender.component?.(...toRender.args, ...oldArgs),
-        context
+        context,
+        timeout,
+        startedTimeCalculated
       );
     }
     if (toRender.asyncComponent !== undefined) {
       //Async component
       toRender
         .asyncComponent(...toRender.args, ...oldArgs)
-        .then(prototype => render(prototype, context))
+        .then(prototype =>
+          render(prototype, context, timeout, startedTimeCalculated)
+        )
         .then(toRender.resolve);
       if (context.dom === undefined) {
         if (toRender.placeHolder !== undefined) {
-          return render(toRender.placeHolder, context) as any;
+          return render(
+            toRender.placeHolder,
+            context,
+            timeout,
+            startedTimeCalculated
+          ) as any;
         }
-        return render({ dom: 'input', type: 'hidden' } as any, context);
+        return render(
+          { dom: 'input', type: 'hidden' } as any,
+          context,
+          timeout,
+          startedTimeCalculated
+        );
       } else {
         return context.dom;
       }
@@ -100,24 +121,56 @@ export const render = <U extends HTMLElement>(
     (children as any[])?.filter((child: any) => child) || [];
 
   const keys: any[] = [];
-  const childrenDom = childrenComponents.map(
-    (child: Prototype<HTMLElement>, index: number) => {
-      if (Array.isArray(child)) {
-        keys.push(child[1]);
-        //Keyed arrays
-        if (context.children[child[1]] === undefined) {
-          context.children[child[1]] = {} as Context<U>;
-        }
-        return render(child[0], context.children[child[1]]);
-      } else {
-        keys.push(index);
-        if (context.children[index] === undefined) {
-          context.children[index] = {} as Context<U>;
-        }
-        return render(child, context.children[index]);
+  const simplifiedChildren = [];
+  childrenComponents.forEach((child: Prototype<HTMLElement>, index: number) => {
+    if (Array.isArray(child)) {
+      keys.push(child[1]);
+      //Keyed arrays
+      if (context.children[child[1]] === undefined) {
+        context.children[child[1]] = {} as Context<U>;
       }
+      simplifiedChildren.push({
+        child: child[0],
+        context: context.children[child[1]],
+      });
+    } else {
+      keys.push(index);
+      if (context.children[index] === undefined) {
+        context.children[index] = {} as Context<U>;
+      }
+      simplifiedChildren.push({ child, context: context.children[index] });
     }
-  );
+  });
+
+  let i = 0;
+  const childrenDom = [];
+  let tempStartedTime = startedTimeCalculated;
+  let dettached = false;
+  const count = () => {
+    while (
+      i < simplifiedChildren.length &&
+      (tempStartedTime === undefined || Date.now() - tempStartedTime < timeout)
+    ) {
+      const simplified = simplifiedChildren[i];
+      childrenDom[i] = render(
+        simplified.child,
+        simplified.context,
+        timeout,
+        startedTimeCalculated
+      );
+      if (dettached && context.dom !== undefined) {
+        context.dom.append(childrenDom[i]);
+      }
+      i++;
+    }
+    if (i < simplifiedChildren.length) {
+      dettached = true;
+      tempStartedTime = Date.now();
+      setTimeout(count);
+    }
+  };
+  count();
+
   context.oldKeys = context.oldKeys || keys;
 
   let creatorStr;
@@ -305,12 +358,14 @@ const insertChildAtIndex = (
  * @param component is a method that returns a prototype
  * @param actions an object that contains methods that receive the store
  * @param store an object that will be passed to the component and the actions
- * @returns
+ * @param timeout render per time chunks of timeout in ms, in order to not block the thread.
+ * @returns a component that can be passed to the render method
  */
 export function buildStore<T extends Node>(
   component: (...args: any[]) => Prototype<T>,
   actions?: (store: any, mappedActions: any) => any,
-  store?: any
+  store?: any,
+  timeout?: number
 ): any {
   //Called in export default
   //Put shared store here
@@ -353,7 +408,7 @@ export function buildStore<T extends Node>(
                 goodContext.ticket = goodContext.ticket + 1;
                 const localTicket = goodContext.ticket;
                 setTimeout(() => {
-                  if (localTicket == goodContext.ticket) {
+                  if (localTicket === goodContext.ticket) {
                     resolve(
                       render(
                         component(
@@ -361,7 +416,8 @@ export function buildStore<T extends Node>(
                           mappedActions,
                           ...(newArgs || [])
                         ) as any,
-                        goodContext as any
+                        goodContext as any,
+                        timeout
                       )
                     );
                   } else {
@@ -406,60 +462,19 @@ export const asyncPure = <T extends Node>(
  * which has been created using the asyncPure function
  * @param toRender A prototype, or a method taking context and returning the prototype
  * @param context the context in which to render this prototype
+ * @param timeout render per time chunks of timeout (ms), in order to not block the thread.
  * @returns a promise on the actual rendered dom node
  */
 export const asyncRender = <U extends HTMLElement>(
   toRender: Prototype<U> | ((context: Context<U>) => Prototype<U>),
-  context: Context<U>
+  context: Context<U>,
+  timeout?: number
 ): Promise<U> => {
   return new Promise(resolve =>
-    render({ ...toRender, resolve } as Prototype<U>, context)
+    render({ ...toRender, resolve } as Prototype<U>, context, timeout)
   );
 };
 
-/**
- * A boilerplate method that can build a prototype with the most used properties
- * @param domValue To be passed to the document.createElement(...) method
- * @param text The innerText dom property
- * @param className an array of string css classNames
- * @returns A prototype builder that can be passed to the render method
- */
-export const builder = <T extends Node>(
-  domValue: keyof HTMLElementTagNameMap,
-  text?: string,
-  className?: string[]
-): (() => Prototype<T>) => {
-  const prototype: any = { init: () => document.createElement(domValue) };
-  if (text !== undefined) {
-    prototype.innerText = text;
-  }
-  if (className !== undefined) {
-    prototype.className = className;
-  }
-  const mapped = () => prototype;
-  const jsKeys = [
-    'innerText',
-    'className',
-    'children',
-    'onclick',
-    'style',
-    'value',
-    'oninput',
-    'setAttribute',
-  ];
-  jsKeys.forEach(
-    key =>
-      ((mapped as any)[key] = (object: any) => {
-        prototype[key] = object;
-        return mapped;
-      })
-  );
-  mapped.prop = (key: string, object: any) => {
-    prototype[key] = object;
-    return mapped;
-  };
-  return mapped;
-};
 function arraysEqual(a: any[], b: any[]) {
   if (a === undefined) return false;
   if (b === undefined) return false;

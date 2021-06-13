@@ -15,3 +15,79 @@ exports[`multiple blocking store render 1`] = `
   </button>
 </div>
 `;
+
+exports[`multiple blocking store render with chunks 1`] = `
+<div>
+  <span
+    class="dev"
+  >
+    1
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+  <div>
+    Hello
+  </div>
+</div>
+`;
