@@ -11,6 +11,7 @@ export interface Context<T extends Node> {
   oldArgs?: any[];
   oldKeys?: any[];
   virtual?: boolean;
+  ticket?: number;
 }
 export const inferType = <T extends HTMLElement>(
   b: Prototype<T>
@@ -323,11 +324,12 @@ export function buildStore<T extends Node>(
           goodContext.store !== undefined
             ? goodContext.store
             : store !== undefined
-            ? { ...store }
+            ? store
             : {};
         if (goodContext.store === undefined) {
           goodContext.store = goodStore;
         }
+        goodContext.ticket = goodContext.ticket || 0;
         const simpleActions = {};
         const goodActions =
           goodContext.actions !== undefined
@@ -346,16 +348,28 @@ export function buildStore<T extends Node>(
             Promise.resolve(goodActions[key](...value));
 
           (mappedActions as any)[key] = (...value: any[]) =>
-            Promise.resolve(goodActions[key](...value)).then(() =>
-              render(
-                component(
-                  goodContext.store,
-                  mappedActions,
-                  ...(newArgs || [])
-                ) as any,
-                goodContext as any
-              )
-            );
+            Promise.resolve(goodActions[key](...value)).then(() => {
+              return new Promise((resolve, reject) => {
+                goodContext.ticket = goodContext.ticket + 1;
+                const localTicket = goodContext.ticket;
+                setTimeout(() => {
+                  if (localTicket == goodContext.ticket) {
+                    resolve(
+                      render(
+                        component(
+                          goodContext.store,
+                          mappedActions,
+                          ...(newArgs || [])
+                        ) as any,
+                        goodContext as any
+                      )
+                    );
+                  } else {
+                    reject('Rendering was abondoned in favor of another');
+                  }
+                });
+              });
+            });
         });
         return component(goodContext.store, mappedActions, ...(newArgs || []));
       },

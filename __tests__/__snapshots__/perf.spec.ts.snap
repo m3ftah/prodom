@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`multiple blocking store render 1`] = `
+<div>
+  <span
+    class="dev"
+  >
+    1
+  </span>
+  <button>
+    increase
+  </button>
+  <button>
+    decrease
+  </button>
+</div>
+`;
