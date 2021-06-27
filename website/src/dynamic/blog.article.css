@@ -1,0 +1,133 @@
+.blog-article-page {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+.header {
+  align-self: flex-end;
+  margin-bottom: 16px;
+}
+.control {
+  display: inline-flex;
+  cursor: pointer;
+  align-self: flex-end;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px lightgray;
+  box-sizing: border-box;
+  padding: 8px;
+  margin-right: 8px;
+}
+.control:hover {
+  box-shadow: 2px 2px 8px 2px lightgray;
+}
+.blog-article-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-self: center;
+  position: relative;
+  padding: 16px;
+  width: 100%;
+  border-bottom: 1px dashed blue;
+  box-sizing: border-box;
+}
+@media only screen and (min-width: 600px) {
+  .blog-article-container {
+    width: 80%;
+  }
+}
+.blog-article-container .blog-article-title {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 16px 16px 0 16px;
+  margin: 0;
+}
+.blog-article-container .blog-article-subtitle {
+  font-size: 1.5rem;
+  font-style: italic;
+  padding: 4px 16px 4px 16px;
+  margin: 0;
+}
+.blog-article-container .blog-article-date {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: bold;
+  padding: 0 16px 0 16px;
+  margin: 0;
+  color: #888;
+}
+.blog-article-container .blog-article-date.dark {
+  color: #fff;
+}
+.blog-article-container .blog-article-body {
+  font-size: 1rem;
+  padding: 16px;
+  margin-bottom: 16px;
+  line-height: 2rem;
+}
+.blog-article-container code {
+  font-size: 1rem;
+  background-color: #eee;
+  padding: 2px;
+  color: #95c;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: #bbb;
+  border-style: solid;
+}
+.dev {
+  background-color: #eee;
+  border-width: 1px;
+  border-color: red;
+  border-style: dashed;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+}
+.rowItem {
+  margin-left: 8px;
+  padding: 8px;
+}
+.grow {
+  flex: 1;
+}
+.blog-article-container .blog-article-image {
+  width: 100px;
+}
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
+.none {
+  display: none;
+}
+.click {
+  display: inline-block;
+  padding: 16;
+}
+.click:hover {
+  cursor: pointer;
+  background-color: #eee;
+  border-radius: 16px;
+}
+
+.colored {
+  background-color: #fde;
+}
+
+.padding {
+  height: 200px;
+}
+
+code.dark,
+h1.dark,
+h2.dark,
+p.dark,
+.dark {
+  background-color: #222;
+  color: #fff;
+}

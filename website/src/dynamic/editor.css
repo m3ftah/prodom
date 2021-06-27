@@ -1,0 +1,122 @@
+.editor-container {
+  padding: 4px 16px 16px 16px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px lightgray;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+.editor-container d {
+  background-color: #eee;
+  border-width: 1px;
+  border-color: red;
+  border-style: dashed;
+}
+.editor-container:hover {
+  box-shadow: 2px 2px 8px 2px lightgray;
+}
+.editor-container .header {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 8px 8px 8px;
+  font-size: 1.5rem;
+  justify-content: space-between;
+}
+.editor-container .title {
+  padding: 0px 8px 8px 8px;
+  font-size: 1.5rem;
+  align-self: center;
+}
+
+.editor-container .record {
+  display: inline-flex;
+  border-radius: 32px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px lightgray;
+}
+.editor-container .record:hover {
+  border-radius: 32px;
+  box-shadow: 2px 2px 8px 2px lightgray;
+}
+
+.editor-container .recording {
+  background-color: lightgray;
+}
+
+.demo-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1 0 auto;
+  word-break: break-all;
+  align-content: space-between;
+}
+
+.demo-container .left-demo {
+  font-size: 1rem;
+  flex-basis: 600px;
+  padding: 8px;
+  min-height: 150px;
+  border-radius: 4px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border: 1px solid #ccc;
+  margin: 4px;
+  white-space: pre;
+}
+
+.demo-container .right-demo {
+  display: flex;
+  flex-basis: 600px;
+
+  align-self: stretch;
+  font-size: 1rem;
+  padding: 8px;
+  border-color: lightgrey;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  word-break: break-all;
+  overflow: hidden;
+  margin: 4px;
+}
+@media only screen and (min-width: 600px) {
+  .demo-container .left-demo {
+    flex: 1;
+  }
+  .demo-container .right-demo {
+    flex: 1;
+  }
+}
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px lightgray;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  display: flex;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 2px 2px 8px 2px lightgray;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip:hover {
+  box-shadow: 2px 2px 8px 2px lightgray;
+}

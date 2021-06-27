@@ -6,6 +6,10 @@ This is a declarative UI web framework.
 
 https://codepen.io/pen/?template=PoppQMM
 
+## More information
+
+https://m3ftah.github.io/prodom
+
 ## Example
 
 ```js
