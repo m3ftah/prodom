@@ -45,7 +45,13 @@
 .blog-article-container .blog-article-subtitle {
   font-size: 1.5rem;
   font-style: italic;
-  padding: 4px 16px 4px 16px;
+  padding: 4px 16px 0px 16px;
+  margin: 0;
+}
+.blog-article-container .blog-article-link {
+  font-size: 1.2rem;
+  font-style: italic;
+  padding: 4px 16px 8px 16px;
   margin: 0;
 }
 .blog-article-container .blog-article-date {

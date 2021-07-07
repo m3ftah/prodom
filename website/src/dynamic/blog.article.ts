@@ -7,6 +7,7 @@ export interface BlogArticleProps {
   title: string
   subtitle: string
   date: string
+  link: string
   body: string
   devMode: boolean
   dark: boolean
@@ -15,7 +16,9 @@ export interface BlogArticleProps {
 const article: BlogArticleProps = {
   title: 'An easy to use web app framework',
   subtitle: 'Prodom, the next open web app framework',
-  date: 'June 27 - 2021',
+  date:
+    'July 7th - 2021 - <a href=" https://github.com/m3ftah/prodom/commits/master/website">Changelog</a>',
+  link: 'https://github.com/m3ftah/prodom',
   body: `
   Prodom is a <code>2kB</code> library that helps you build web apps.
   By design, it is a declarative framework, component based and easy to use.
@@ -62,7 +65,7 @@ const article: BlogArticleProps = {
 }
 
 const createBlogArticle = (
-  { title, subtitle, date, body, devMode = true, dark }: BlogArticleProps,
+  { title, subtitle, date, link, body, devMode = true, dark }: BlogArticleProps,
   { setDark, setDevMode }: BlogActions,
 ): Prototype<HTMLBodyElement> => {
   const darkModeDOM: Prototype<HTMLDivElement> = {
@@ -109,10 +112,18 @@ const createBlogArticle = (
     contentEditable: devMode,
   }
 
+  const linkDOM = {
+    dom: 'a',
+    className: ['blog-article-link', devMode && 'dev', dark && 'dark'],
+    innerText: link,
+    href: link,
+    contentEditable: devMode,
+  }
+
   const dateDOM = {
     dom: 'p',
     className: ['blog-article-date', devMode && 'dev', dark && 'dark'],
-    innerText: date,
+    innerHTML: date,
     contentEditable: devMode,
   }
 
@@ -138,6 +149,7 @@ const createBlogArticle = (
     children: [
       titleDOM,
       subtitleDOM,
+      linkDOM,
       dateDOM,
       {
         dom: 'img',
