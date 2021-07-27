@@ -14,26 +14,26 @@ export interface BlogArticleProps {
 }
 
 const article: BlogArticleProps = {
-  title: 'An easy to use web app framework',
-  subtitle: 'Prodom, the next open web app framework',
+  title: 'An easy to use web framework',
+  subtitle: 'Prodom, the next open web framework',
   date:
     'July 7th - 2021 - <a href=" https://github.com/m3ftah/prodom/commits/master/website">Changelog</a>',
   link: 'https://github.com/m3ftah/prodom',
   body: `
   Prodom is a <code>2kB</code> library that helps you build web apps.
   By design, it is a declarative framework, component based and easy to use.
-  Moreover, it can be integrated into already existing projects with no lock-in, as it only works on a dom object,
+  Moreover, it can be integrated into already existing projects with no lock-in, as it only works on a DOM object,
   and exports a dom object.
   </br>
   Prodom allows you to to compose and manage complex dom elements using pure idiomatic javascript.
-  You do not need to learn anything new, aside from the prototype concept and the store structure.
+  You do not need to learn anything new aside from the <b>prototype</b> concept and the <b>store</b> structure.
   </br>
   Prodom follows a <i>Flux Architecture</i> concept by providing you with a built-in store/actions design.
   </br>
   The main motivation behind providing such a framework is the complexity and the overhead given by popular web frameworks.
   Not to mention the lock-in, the library size and the complex buggy APIs.
   </br>
-  If you are already familiar with some standard web concepts like: <i>Flux Architecture</i>, pure components and HTML5.
+  If you are already familiar with some standard concepts like: <i>Flux Architecture</i>, pure components and HTML5.
   Then you are ready to use Prodom.
   <h3>Some <i>behind the scene</i> considerations</h3>
  
@@ -41,22 +41,21 @@ const article: BlogArticleProps = {
   Thus, minimizing the number of DOM operations.
   </br>
   <b>Concurrent Mode:</b> you can specify a timeout for which, the rendering will not block the UI for more than that timeout.
-  This feature was only available very late in React.js (just after I gave up on it).
+  This feature was only recently available in React.js (just after I gave up on it).
   </br>
   <b>Differed rendering:</b> you can provide a promise on a component that will be rendered after a data is fetched. Meanwhile,
   you can provide another component as a placeholder.
   </br>
-  <b>Automatic batching:</b> when multiple store actions are called in the time, the store state will be updated accordingly,
+  <b>Automatic batching:</b> when multiple store actions are called at the same time, the store state will be updated accordingly,
   but only one rendering function will be called at the end.
   While this feature is not yet available in React.js; it is provided by Prodom out of the box.
   </br>
-  <b>Carried Context:</b> this means you can render from every where, the context object needed to render is provided to you
-  in every component.
+  <b>Carried Context:</b> this means you can render from anywhere.
   This may come handy if you want to extend Prodom.
   </br>
   <b>Finally,</b> while Prodom has been heavily inspired by React.js, this is not a swiss army knife solution as React.js.
-  The main reason behind building such framework is effeciency.
-  With small size, few concepts to get around; you can code web apps faster with out of the box production performance.
+  The main reason behind building such framework is efficiency.
+  With small size, few concepts to get around; you can code web apps faster with out of the box performance.
   `,
   devMode: false,
   dark:
