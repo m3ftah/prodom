@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dom property 1`] = `
-<div
-  class="form-item"
->
-  <p
-    class="form"
-  >
-    some text
-  </p>
-  <input
-    class="selected"
-  >
-    other input
-  </input>
-</div>
-`;
-
 exports[`freeze property 1`] = `
 <p>
   child text
@@ -91,6 +74,23 @@ exports[`setAttribute property 5`] = `
 >
   other input
 </input>
+`;
+
+exports[`tag property 1`] = `
+<div
+  class="form-item"
+>
+  <p
+    class="form"
+  >
+    some text
+  </p>
+  <input
+    class="selected"
+  >
+    other input
+  </input>
+</div>
 `;
 
 exports[`virtual property 1`] = `

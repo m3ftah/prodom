@@ -10,22 +10,22 @@ test('remove one child', () => {
   const context = {};
   const receivedDOM = render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         {
-          dom: 'input',
+          tag: 'input',
           type: 'label',
           textContent: child1Text,
           className: ['form'],
         } as Prototype<HTMLInputElement>,
         {
-          dom: 'input',
+          tag: 'input',
           textContent: child2Text,
           className: ['selected'],
         } as Prototype<HTMLInputElement>,
         {
-          dom: 'span',
+          tag: 'span',
           textContent: child3Text,
           className: ['warning'],
         } as Prototype<HTMLSpanElement>,
@@ -45,17 +45,17 @@ test('remove one child', () => {
   expect(receivedDOM).toMatchSnapshot();
   render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         {
-          dom: 'input',
+          tag: 'input',
           type: 'label',
           textContent: child1Text,
           className: ['form'],
         } as Prototype<HTMLInputElement>,
         {
-          dom: 'span',
+          tag: 'span',
           textContent: child3Text,
           className: ['warning'],
         } as Prototype<HTMLSpanElement>,
@@ -79,19 +79,19 @@ test('move one keyed child - keep pure', () => {
   const Warning = pure((text: string) => {
     mockable(text);
     return {
-      dom: 'span',
+      tag: 'span',
       textContent: text,
       className: ['warning'],
     } as Prototype<HTMLSpanElement>;
   });
   const receivedDOM = render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         [
           {
-            dom: 'input',
+            tag: 'input',
             type: 'label',
             textContent: child1Text,
             className: ['form'],
@@ -100,7 +100,7 @@ test('move one keyed child - keep pure', () => {
         ],
         [
           {
-            dom: 'input',
+            tag: 'input',
             textContent: child2Text,
             className: ['selected'],
           } as Prototype<HTMLInputElement>,
@@ -123,12 +123,12 @@ test('move one keyed child - keep pure', () => {
   expect(receivedDOM).toMatchSnapshot();
   render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         [
           {
-            dom: 'input',
+            tag: 'input',
             type: 'label',
             textContent: child1Text,
             className: ['form'],
@@ -138,7 +138,7 @@ test('move one keyed child - keep pure', () => {
         [Warning(child3Text), 'child3'],
         [
           {
-            dom: 'input',
+            tag: 'input',
             textContent: child2Text,
             className: ['selected'],
           } as Prototype<HTMLInputElement>,
@@ -156,13 +156,13 @@ test('move one keyed child - keep pure', () => {
 
   render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         [Warning(child3Text), 'child3'],
         [
           {
-            dom: 'input',
+            tag: 'input',
             type: 'label',
             textContent: child1Text,
             className: ['form'],
@@ -184,17 +184,17 @@ test('render with condition', () => {
   const context = {};
   const Form = (withText: boolean): Prototype<HTMLDivElement> => {
     return {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         withText &&
           ({
-            dom: 'p',
+            tag: 'p',
             textContent: 'some text',
             className: ['form'],
           } as Prototype<HTMLInputElement>),
         {
-          dom: 'input',
+          tag: 'input',
           textContent: 'other input',
           className: ['selected'],
         } as Prototype<HTMLInputElement>,

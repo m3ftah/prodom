@@ -19,7 +19,7 @@ export const inferType = <T extends HTMLElement>(
   return b;
 };
 export type Prototype<T extends Node> = {
-  dom?: string;
+  tag?: string;
   virtual?: boolean;
   init?: () => T;
   children?: Prototype<Node>[] | [Prototype<Node>, string][];
@@ -95,7 +95,7 @@ export const render = <U extends HTMLElement>(
           ) as any;
         }
         return render(
-          { dom: 'input', type: 'hidden' } as any,
+          { tag: 'input', type: 'hidden' } as any,
           context,
           timeout,
           startedTimeCalculated
@@ -108,7 +108,7 @@ export const render = <U extends HTMLElement>(
   if (toRender.freeze === true) {
     return;
   }
-  const { dom, children, virtual, ...props } = toRender;
+  const { tag, children, virtual, ...props } = toRender;
   if (context === undefined || context === null) {
     console.error('A context has not been provided');
     return;
@@ -175,8 +175,8 @@ export const render = <U extends HTMLElement>(
 
   let creatorStr;
   if (!Object.prototype.hasOwnProperty.call(toRender, 'init')) {
-    toRender.init = () => document.createElement(dom) as any;
-    creatorStr = '' + dom;
+    toRender.init = () => document.createElement(tag) as any;
+    creatorStr = '' + tag;
   } else {
     creatorStr = '' + toRender.init;
   }

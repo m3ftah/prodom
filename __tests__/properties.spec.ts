@@ -15,7 +15,7 @@ test('init property', () => {
       className: ['form-item'],
       children: [
         {
-          dom: 'p',
+          tag: 'p',
           textContent: 'some text',
           className: ['form'],
         } as Prototype<HTMLInputElement>,
@@ -60,19 +60,19 @@ test('init property', () => {
   expect(receivedDOM2).toMatchSnapshot();
 });
 
-test('dom property', () => {
+test('tag property', () => {
   const receivedDOM = render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         {
-          dom: 'p',
+          tag: 'p',
           textContent: 'some text',
           className: ['form'],
         } as Prototype<HTMLInputElement>,
         {
-          dom: 'input',
+          tag: 'input',
           textContent: 'other input',
           className: ['selected'],
         } as Prototype<HTMLInputElement>,
@@ -95,7 +95,7 @@ test('virtual property', () => {
   profileNameDOM.id = childID;
   containerDOM.append(profileNameDOM);
   const prototype: Prototype<HTMLSpanElement> = {
-    dom: 'div',
+    tag: 'div',
     children: [
       {
         init: () => containerDOM.querySelector('#' + childID),
@@ -103,7 +103,7 @@ test('virtual property', () => {
         virtual: true,
       },
       {
-        dom: 'span',
+        tag: 'span',
         textContent: textContext1,
       },
     ],
@@ -122,13 +122,13 @@ test('freeze property', () => {
   const expectedText2 = 'modified by diff';
   const context = {};
   const receivedDOM = render(
-    { dom: 'p', textContent: expectedText1 } as Prototype<HTMLParagraphElement>,
+    { tag: 'p', textContent: expectedText1 } as Prototype<HTMLParagraphElement>,
     context
   );
   expect((receivedDOM as HTMLParagraphElement).textContent).toBe(expectedText1);
   render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText2,
       freeze: true,
     } as Prototype<HTMLParagraphElement>,
@@ -142,7 +142,7 @@ test('setAttribute property', () => {
   const context = {};
   const receivedDOM = render(
     {
-      dom: 'input',
+      tag: 'input',
       textContent: 'other input',
       className: ['selected'],
     } as Prototype<HTMLInputElement>,
@@ -154,7 +154,7 @@ test('setAttribute property', () => {
 
   render(
     {
-      dom: 'input',
+      tag: 'input',
       setAttribute: {
         type: 'radio',
       },
@@ -169,7 +169,7 @@ test('setAttribute property', () => {
 
   render(
     {
-      dom: 'input',
+      tag: 'input',
       setAttribute: {
         type: 'checkbox',
       },
@@ -184,7 +184,7 @@ test('setAttribute property', () => {
 
   render(
     {
-      dom: 'input',
+      tag: 'input',
       setAttribute: {
         data: 'here',
       },
@@ -199,7 +199,7 @@ test('setAttribute property', () => {
 
   render(
     {
-      dom: 'input',
+      tag: 'input',
       textContent: 'other input',
       className: ['selected'],
     } as Prototype<HTMLInputElement>,

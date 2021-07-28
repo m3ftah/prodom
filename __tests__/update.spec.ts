@@ -8,12 +8,12 @@ test('update textContent', () => {
   const expectedText2 = 'modified by diff';
   const context = {};
   const receivedDOM = render(
-    { dom: 'p', textContent: expectedText1 } as Prototype<HTMLParagraphElement>,
+    { tag: 'p', textContent: expectedText1 } as Prototype<HTMLParagraphElement>,
     context
   );
   expect((receivedDOM as HTMLParagraphElement).textContent).toBe(expectedText1);
   render(
-    { dom: 'p', textContent: expectedText2 } as Prototype<HTMLParagraphElement>,
+    { tag: 'p', textContent: expectedText2 } as Prototype<HTMLParagraphElement>,
     context
   );
   expect((receivedDOM as HTMLParagraphElement).textContent).toBe(expectedText2);
@@ -27,7 +27,7 @@ test('remove one className', () => {
   const context = {};
   const receivedDOM = render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText1,
       className: [className1, 'highlighted'],
     } as Prototype<HTMLParagraphElement>,
@@ -37,7 +37,7 @@ test('remove one className', () => {
   expect((receivedDOM as HTMLParagraphElement).classList).toContain(className1);
   render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText2,
       className: ['highlighted'],
     } as Prototype<HTMLParagraphElement>,
@@ -57,7 +57,7 @@ test('remove all classNames', () => {
   const context = {};
   const receivedDOM = render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText1,
       className: [className1, 'highlighted'],
     } as Prototype<HTMLParagraphElement>,
@@ -66,7 +66,7 @@ test('remove all classNames', () => {
   expect((receivedDOM as HTMLParagraphElement).textContent).toBe(expectedText1);
   expect((receivedDOM as HTMLParagraphElement).classList).toContain(className1);
   render(
-    { dom: 'p', textContent: expectedText2 } as Prototype<HTMLParagraphElement>,
+    { tag: 'p', textContent: expectedText2 } as Prototype<HTMLParagraphElement>,
     context
   );
   expect((receivedDOM as HTMLParagraphElement).textContent).toBe(expectedText2);
@@ -85,7 +85,7 @@ test('update style', () => {
   const context = {};
   const receivedDOM = render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText1,
       style: {
         backgroundColor,
@@ -96,7 +96,7 @@ test('update style', () => {
   const defaultColor = receivedDOM.style.color;
   render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText1,
       style: {
         color: expectedColor1,
@@ -111,7 +111,7 @@ test('update style', () => {
   );
   render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText2,
       className: ['highlighted'],
       style: {
@@ -129,7 +129,7 @@ test('update style', () => {
 
   render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText2,
       className: ['highlighted'],
       style: {
@@ -150,7 +150,7 @@ test('update style', () => {
 
   render(
     {
-      dom: 'p',
+      tag: 'p',
       textContent: expectedText2,
       className: ['highlighted'],
     } as Prototype<HTMLParagraphElement>,
@@ -169,17 +169,17 @@ test('update children content and type', () => {
   const context = {};
   const receivedDOM = render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         {
-          dom: 'input',
+          tag: 'input',
           type: 'label',
           textContent: child1Text,
           className: ['form'],
         } as Prototype<HTMLInputElement>,
         {
-          dom: 'input',
+          tag: 'input',
           textContent: child2Text,
           className: ['selected'],
         } as Prototype<HTMLInputElement>,
@@ -200,16 +200,16 @@ test('update children content and type', () => {
   expect(receivedDOM).toMatchSnapshot();
   render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         {
-          dom: 'p',
+          tag: 'p',
           textContent: expectedText1,
           className: ['form'],
         } as Prototype<HTMLInputElement>,
         {
-          dom: 'input',
+          tag: 'input',
           textContent: expectedText2,
           className: ['selected'],
         } as Prototype<HTMLInputElement>,
@@ -238,7 +238,7 @@ test('update pure component', () => {
   const Warning = pure((text: string) => {
     mockable(text);
     return {
-      dom: 'span',
+      tag: 'span',
       textContent: text,
       className: ['warning'],
     } as Prototype<HTMLSpanElement>;

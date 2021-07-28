@@ -14,7 +14,7 @@ import {
 
 test('render innerText', () => {
   const expected = 'hello';
-  const receivedDOM = render({ dom: 'div', innerText: expected }, {});
+  const receivedDOM = render({ tag: 'div', innerText: expected }, {});
   expect(receivedDOM.innerText).toBe(expected);
 });
 
@@ -22,9 +22,9 @@ test('render one child', () => {
   const expected = 'child text';
   const receivedDOM = render(
     {
-      dom: 'div',
+      tag: 'div',
       children: [
-        { dom: 'p', textContent: expected } as Prototype<HTMLParagraphElement>,
+        { tag: 'p', textContent: expected } as Prototype<HTMLParagraphElement>,
       ],
     },
     {}
@@ -40,17 +40,17 @@ test('render two children', () => {
   const child2Text = 'child 2';
   const receivedDOM = render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['form-item'],
       children: [
         {
-          dom: 'input',
+          tag: 'input',
           type: 'label',
           textContent: child1Text,
           className: ['form'],
         } as Prototype<HTMLInputElement>,
         {
-          dom: 'input',
+          tag: 'input',
           textContent: child2Text,
           className: ['selected'],
         } as Prototype<HTMLInputElement>,
@@ -76,10 +76,10 @@ test('render component', () => {
     name: string,
     imageUrl: string
   ): Prototype<HTMLDivElement> => ({
-    dom: 'div',
+    tag: 'div',
     children: [
-      { dom: 'span', textContent: name },
-      { dom: 'img', src: imageUrl } as Prototype<HTMLImageElement>,
+      { tag: 'span', textContent: name },
+      { tag: 'img', src: imageUrl } as Prototype<HTMLImageElement>,
     ],
   });
   const userInfo = {
@@ -115,21 +115,21 @@ test('render store', () => {
     { increase, decrease }: StoreActionsType,
     devMode: boolean
   ) => ({
-    dom: 'div',
+    tag: 'div',
     children: [
       devMode &&
         ({
-          dom: 'span',
+          tag: 'span',
           textContent: '' + count,
           className: [devMode && 'dev'],
         } as Prototype<HTMLSpanElement>),
       {
-        dom: 'button',
+        tag: 'button',
         textContent: 'increase',
         onclick: increase,
       } as Prototype<HTMLButtonElement>,
       {
-        dom: 'button',
+        tag: 'button',
         textContent: 'decrease',
         onclick: decrease,
       } as Prototype<HTMLButtonElement>,
@@ -158,20 +158,20 @@ test('render pure component', () => {
   const CounterInternal = (count: number, oldCount: number) => {
     mockable(count);
     return {
-      dom: 'div',
+      tag: 'div',
       children: [
         {
-          dom: 'span',
+          tag: 'span',
           textContent:
             '' + count + (oldCount !== undefined ? ', was: ' + oldCount : ''),
           className: ['dev'],
         } as Prototype<HTMLSpanElement>,
         {
-          dom: 'button',
+          tag: 'button',
           textContent: 'increase',
         } as Prototype<HTMLButtonElement>,
         {
-          dom: 'button',
+          tag: 'button',
           textContent: 'decrease',
         } as Prototype<HTMLButtonElement>,
       ],
@@ -204,10 +204,10 @@ test('render async pure component', async () => {
       setTimeout(
         () =>
           resolve({
-            dom: 'div',
+            tag: 'div',
             children: [
               {
-                dom: 'span',
+                tag: 'span',
                 textContent:
                   '' +
                   count +
@@ -215,11 +215,11 @@ test('render async pure component', async () => {
                 className: ['dev'],
               } as Prototype<HTMLSpanElement>,
               {
-                dom: 'button',
+                tag: 'button',
                 textContent: 'increase',
               } as Prototype<HTMLButtonElement>,
               {
-                dom: 'button',
+                tag: 'button',
                 textContent: 'decrease',
               } as Prototype<HTMLButtonElement>,
             ],
@@ -251,11 +251,11 @@ test('render contextual component', () => {
   const UserImage = (name: string) => (
     context: Context<HTMLDivElement>
   ): Prototype<HTMLDivElement> => ({
-    dom: 'div',
+    tag: 'div',
     children: [
-      { dom: 'span', textContent: name },
+      { tag: 'span', textContent: name },
       inferType({
-        dom: 'button',
+        tag: 'button',
         onclick: () => render(UserImage(newName), context),
       }),
     ],

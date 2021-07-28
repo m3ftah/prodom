@@ -8,7 +8,7 @@ test('embed inside dom', () => {
   const className1 = 'activated';
   const containerDOM = document.createElement('div');
   const prototype = {
-    dom: 'span',
+    tag: 'span',
     id: childID,
     className: [className1],
   };
@@ -47,10 +47,10 @@ test('use third-party dom element', () => {
   };
   const receivedDOM = render(
     {
-      dom: 'div',
+      tag: 'div',
       className: ['highlighted'],
       children: [
-        { dom: 'p', textContent: expectedText1 },
+        { tag: 'p', textContent: expectedText1 },
         {
           init: () => generateImageDOM(imageSRC),
           className: [className1],

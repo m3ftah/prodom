@@ -29,21 +29,21 @@ test('multiple blocking store render', () => {
       continue;
     }
     return {
-      dom: 'div',
+      tag: 'div',
       children: [
         devMode &&
           ({
-            dom: 'span',
+            tag: 'span',
             textContent: '' + count,
             className: [devMode && 'dev'],
           } as Prototype<HTMLSpanElement>),
         {
-          dom: 'button',
+          tag: 'button',
           textContent: 'increase',
           onclick: increase,
         } as Prototype<HTMLButtonElement>,
         {
-          dom: 'button',
+          tag: 'button',
           textContent: 'decrease',
           onclick: decrease,
         } as Prototype<HTMLButtonElement>,
@@ -88,7 +88,7 @@ test('multiple blocking store render with chunks', () => {
     while (Date.now() - start < 100) {
       continue;
     }
-    return { dom: 'div', textContent: 'Hello' };
+    return { tag: 'div', textContent: 'Hello' };
   };
   interface StoreActionsType {
     increase: () => void;
@@ -118,17 +118,17 @@ test('multiple blocking store render with chunks', () => {
     children.push(
       devMode &&
         ({
-          dom: 'span',
+          tag: 'span',
           textContent: '' + count,
           className: [devMode && 'dev'],
         } as Prototype<HTMLSpanElement>),
       {
-        dom: 'button',
+        tag: 'button',
         textContent: 'increase',
         onclick: increase,
       } as Prototype<HTMLButtonElement>,
       {
-        dom: 'button',
+        tag: 'button',
         textContent: 'decrease',
         onclick: decrease,
       } as Prototype<HTMLButtonElement>
@@ -139,7 +139,7 @@ test('multiple blocking store render with chunks', () => {
       children.push(heavyComponent);
     }
     return {
-      dom: 'div',
+      tag: 'div',
       children,
     };
   };
@@ -189,7 +189,7 @@ test('render component with chunks', () => {
     while (Date.now() - start < 100) {
       continue;
     }
-    return { dom: 'span', textContent: 'Hello' };
+    return { tag: 'span', textContent: 'Hello' };
   };
   const Component = (): Prototype<HTMLDivElement> => {
     const children = [];
@@ -198,7 +198,7 @@ test('render component with chunks', () => {
       children.push(heavyComponent);
     }
     return {
-      dom: 'div',
+      tag: 'div',
       children,
     };
   };
