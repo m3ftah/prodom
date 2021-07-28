@@ -53,7 +53,7 @@ export const render = <U extends HTMLElement>(
   startedTime?: number
 ): U => {
   let startedTimeCalculated = startedTime;
-  if (timeout !== undefined && startedTimeCalculated == undefined) {
+  if (timeout !== undefined && startedTimeCalculated === undefined) {
     startedTimeCalculated = Date.now();
   }
   if (typeof toRender === 'function') {
