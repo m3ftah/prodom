@@ -68,7 +68,7 @@ const createBlogArticle = (
   { setDark, setDevMode }: BlogActions,
 ): Prototype<HTMLBodyElement> => {
   const darkModeDOM: Prototype<HTMLDivElement> = {
-    dom: 'div',
+    tag: 'div',
     className: ['control'],
     style: { backgroundColor: dark ? '#bbb' : '#666' },
     onclick: () => setDark(!dark),
@@ -76,14 +76,14 @@ const createBlogArticle = (
     children: [darkIcon(dark, '#666', '#bbb')],
   }
   const devModeDOM: Prototype<HTMLDivElement> = {
-    dom: 'div',
+    tag: 'div',
     className: ['control'],
     onclick: () => setDevMode(!devMode),
     contentEditable: '' + devMode,
     children: [devIcon(dark, '#666', '#bbb')],
   }
   const headerDOM: Prototype<HTMLDivElement> = {
-    dom: 'div',
+    tag: 'div',
     className: ['header'],
     children: [devModeDOM, darkModeDOM],
   }
@@ -97,7 +97,7 @@ const createBlogArticle = (
   }
 
   const titleDOM = {
-    dom: 'h1',
+    tag: 'h1',
     className: ['blog-article-title', devMode && 'dev', dark && 'dark'],
     style: { ...style1(devMode), ...(devMode && style2) },
     innerText: title,
@@ -105,14 +105,14 @@ const createBlogArticle = (
   }
 
   const subtitleDOM = {
-    dom: 'p',
+    tag: 'p',
     className: ['blog-article-subtitle', devMode && 'dev', dark && 'dark'],
     innerText: subtitle,
     contentEditable: devMode,
   }
 
   const linkDOM = {
-    dom: 'a',
+    tag: 'a',
     className: ['blog-article-link', devMode && 'dev', dark && 'dark'],
     innerText: link,
     href: link,
@@ -120,21 +120,21 @@ const createBlogArticle = (
   }
 
   const dateDOM = {
-    dom: 'p',
+    tag: 'p',
     className: ['blog-article-date', devMode && 'dev', dark && 'dark'],
     innerHTML: date,
     contentEditable: devMode,
   }
 
   const bodyDOM: Prototype<HTMLParagraphElement> = {
-    dom: 'p',
+    tag: 'p',
     className: ['blog-article-body', devMode && 'dev', dark && 'dark'],
     innerHTML: body,
     contentEditable: '' + devMode,
   }
 
   const exampleTitle = {
-    dom: 'h2',
+    tag: 'h2',
     innerText: 'Some examples',
     style: {
       marginBottom: '50px',
@@ -143,7 +143,7 @@ const createBlogArticle = (
 
   const buildStore = buildIt
   const container = {
-    dom: 'div',
+    tag: 'div',
     className: ['blog-article-container', devMode && 'dev', dark && 'dark'],
     children: [
       titleDOM,
@@ -151,7 +151,7 @@ const createBlogArticle = (
       linkDOM,
       dateDOM,
       {
-        dom: 'img',
+        tag: 'img',
         src: icon,
         style: {
           display: 'inline-block',
@@ -164,7 +164,7 @@ const createBlogArticle = (
       exampleTitle,
       Editor(
         `{
-    dom: 'code',
+    tag: 'code',
     innerText: 'Hello world',
 }`,
         'A simple prototype',
@@ -174,19 +174,19 @@ const createBlogArticle = (
       ),
       Editor(
         `{
-  dom: 'div',
+  tag: 'div',
   children:
   [
     {
-      dom: 'label',
+      tag: 'label',
       innerText: 'First child: ',
     },
     {
-      dom: 'input',
+      tag: 'input',
       value: 'Second child',
     },
     {
-      dom: 'button',
+      tag: 'button',
       innerText: 'Third child',
     },
   ]
@@ -198,7 +198,7 @@ const createBlogArticle = (
       ),
       Editor(
         `{
-  dom: 'code',
+  tag: 'code',
   innerText: 'Hello world',
   className: ['bold', dark && 'dark']
 }`,
@@ -209,7 +209,7 @@ const createBlogArticle = (
       ),
       Editor(
         `{
-  dom: 'button',
+  tag: 'button',
   innerText: 'Click me!',
   onclick: ()=> setTitle('Title has been modified')
 }`,
@@ -220,7 +220,7 @@ const createBlogArticle = (
       ),
       Editor(
         `{
-  dom: 'div',
+  tag: 'div',
   innerText: 'I am styled',
   style: {display: 'flex' , alignSelf: ' center', padding: '16px', borderRadius: '8px', backgroundColor: '#29f'}
 }`,
@@ -232,15 +232,15 @@ const createBlogArticle = (
       Editor(
         `() => {
         const prototype = ({ name }, { setName }) => ({
-          dom: 'div',
+          tag: 'div',
           children: [
             {
-              dom: 'input',
+              tag: 'input',
               value: name,
               oninput: (e) => setName(e.target.value)
             },
             {
-              dom: 'div',
+              tag: 'div',
               innerText: 'Name: ' + name,
               onclick: () => setName('User 1')
             }
@@ -260,7 +260,7 @@ const createBlogArticle = (
     contentEditable: '' + devMode,
   }
   const padding = {
-    dom: 'div',
+    tag: 'div',
     className: ['padding', dark && 'dark'],
     contentEditable: '' + devMode,
   }

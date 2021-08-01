@@ -18,22 +18,21 @@ const Editor = (
 ) => {
   const resolvedDemo = demo !== undefined ? demo : demoProp
   const resolvedTitle = title !== undefined ? title : titleProp
-  const dom = (str: string) => document.createElement(str)
   const buildStore = buildIt
   const titleDOM = {
-    dom: 'div',
+    tag: 'div',
     className: ['title', devMode && 'dev', dark && 'dark'],
     innerText: resolvedTitle,
     contentEditable: devMode,
   }
 
   const linkDOM = {
-    dom: 'div',
+    tag: 'div',
     className: ['title', 'tooltip', devMode && 'dev', dark && 'dark'],
     children: [
-      { dom: 'span', innerText: 'edit on codepen', className: ['tooltiptext'] },
+      { tag: 'span', innerText: 'edit on codepen', className: ['tooltiptext'] },
       {
-        dom: 'a',
+        tag: 'a',
         href: link,
         className: ['link'],
         children: [devIcon(dark, '#666', '#bbb', 16, 16)],
@@ -43,14 +42,14 @@ const Editor = (
   }
 
   const headerDOM: Prototype<HTMLDivElement> = {
-    dom: 'div',
+    tag: 'div',
     className: ['header', devMode && 'dev', dark && 'dark'],
     children: [titleDOM, link && linkDOM],
     contentEditable: devMode,
   }
 
   const leftDemoDOM: Prototype<HTMLDivElement> = {
-    dom: 'div',
+    tag: 'div',
     className: ['left-demo', devMode && 'dev', dark && 'dark'],
     innerText: demoProp,
     oninput: (e: Event) => {
@@ -59,20 +58,20 @@ const Editor = (
     contentEditable: 'true',
   }
   const rightDemoDOM = inferType({
-    dom: 'div',
+    tag: 'div',
     className: ['right-demo', devMode && 'dev', dark && 'dark'],
     children: [eval('(' + resolvedDemo + ')')],
     contentEditable: devMode,
   })
 
   const demoContainerDOM: Prototype<HTMLDivElement> = {
-    dom: 'div',
+    tag: 'div',
     className: ['demo-container', devMode && 'dev', dark && 'dark'],
     children: [leftDemoDOM, rightDemoDOM],
     contentEditable: devMode,
   }
   return {
-    dom: 'div',
+    tag: 'div',
     className: ['editor-container', devMode && 'dev', dark && 'dark'],
     children: [headerDOM, demoContainerDOM],
     contentEditable: devMode,

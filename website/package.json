@@ -43,6 +43,6 @@
     "webpack-pwa-manifest": "^4.3.0"
   },
   "dependencies": {
-    "prodom": "^0.0.3"
+    "prodom": "^0.0.4"
   }
 }
